@@ -1,5 +1,7 @@
 # Punch-Along!!
 
+[Try it out here on GH Pages](https://wes337.github.io/punch-along/)
+
 Generate random boxing combos, and punch along. Written in vanilla JS. Inspired from Super Punch-Out!! for Super Nintendo.
 
 Sprites are from [The Spriters Resource](https://www.spriters-resource.com/custom_edited/punchoutcustoms/sheet/120257/).

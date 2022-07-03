@@ -6,7 +6,7 @@
   "main": "./public/main.js",
   "scripts": {
     "start": "serve ./public",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d public"
   },
   "author": "",
   "license": "ISC",

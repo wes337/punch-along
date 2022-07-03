@@ -1,0 +1,144 @@
+html,
+body {
+  background-color: #f7e7e7;
+}
+
+body {
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  margin: 24px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #940829;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+form .footer,
+form .header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+form .header > label {
+  width: 100%;
+  text-align: right;
+}
+
+form .footerButtons {
+  display: flex;
+  gap: 8px;
+}
+
+form .input span {
+  line-height: 1;
+}
+
+form fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+form legend {
+  font-size: 14px;
+}
+
+canvas {
+  width: 100%;
+  image-rendering: pixelated;
+  image-rendering: optimizespeed;
+}
+
+.allowedMoves {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comboWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 675px;
+  margin: 4px;
+  background-color: #546d8e;
+}
+
+#combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+#combo .countdown {
+  text-align: center;
+  margin: auto;
+  font-size: 24px;
+  padding: 24px;
+  color: #ffffff;
+}
+
+#combo ul {
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  top: 16px;
+}
+
+#combo ul li {
+  display: none;
+}
+
+#combo ul li.is-success,
+#combo ul li.is-warning {
+  display: list-item;
+  text-transform: uppercase;
+}
+
+#combo ul li.is-success::before {
+  color: #92cc41;
+}
+
+#combo ul li.is-warning::before {
+  color: #f7d51d;
+}
+
+@media all and (max-width: 600px) {
+  form .footer,
+  form .header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  form .header > label {
+    width: auto;
+    margin: 16px auto;
+  }
+
+  .nes-container {
+    padding: 1rem;
+  }
+}

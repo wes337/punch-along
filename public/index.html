@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boxing Combo Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="/js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>PUNCH-ALONG!!</h1>
+      <h2>The Boxing Combo Generator</h2>
+    </header>
+    <main>
+      <div class="nes-container is-dark is-rounded">
+        <form id="comboGenerator">
+          <div class="header">
+            <div class="nes-field">
+              <label for="numberOfMoves">Number of moves (1-10):</label>
+              <input
+                type="number"
+                id="numberOfMoves"
+                class="nes-input is-dark"
+                min="1"
+                max="10"
+                value="3"
+              />
+            </div>
+            <label>
+              <input
+                type="checkbox"
+                id="countDown"
+                value="true"
+                class="nes-checkbox is-dark"
+              />
+              <span>Enable countdown</span>
+            </label>
+          </div>
+          <div class="nes-container with-title is-dark is-rounded">
+            <p class="title">Allowed moves</p>
+            <div class="allowedMoves">
+              <fieldset id="offense">
+                <legend class="nes-text is-warning">Offense:</legend>
+              </fieldset>
+              <fieldset id="defense">
+                <legend class="nes-text is-success">Defense:</legend>
+              </fieldset>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="input">
+              <label for="speed">Speed:</label>
+              <input type="range" id="speed" min="1" max="10" value="4" />
+            </div>
+            <div class="footerButtons">
+              <button type="submit" id="comboSubmit" class="nes-btn is-primary">
+                Generate
+              </button>
+              <button type="button" id="comboReset" class="nes-btn">
+                Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="nes-container comboWrapper">
+        <div id="combo"></div>
+        <canvas id="canvas"></canvas>
+        <progress
+          id="comboProgress"
+          class="nes-progress is-primary"
+          value="0"
+          max="100"
+        ></progress>
+      </div>
+    </main>
+  </body>
+</html>

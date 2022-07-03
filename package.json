@@ -1,8 +1,8 @@
 {
-  "name": "boxing-combo-generator",
+  "name": "punch-along",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./public/main.js",
   "scripts": {
     "start": "serve ./public",
     "test": "echo \"Error: no test specified\" && exit 1"

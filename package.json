@@ -1,11 +1,12 @@
 {
   "name": "punch-along",
+  "homepage": "http://wes337.github.io/punch-along",
   "version": "1.0.0",
   "description": "",
   "main": "./public/main.js",
   "scripts": {
     "start": "serve ./public",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "serve": "^13.0.2"
   },
   "devDependencies": {
-    "eslint": "^8.18.0"
+    "eslint": "^8.18.0",
+    "gh-pages": "^4.0.0"
   }
 }

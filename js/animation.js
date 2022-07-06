@@ -114,8 +114,11 @@ const getNextSpriteIndex = (animation) => {
   }
 
   animations[animation].currentFrame = nextFrame;
+  const alternateOffset = animations[animation].alternate
+    ? animations[animation].frames
+    : 0;
   const nextSpriteIndex = Math.max(
-    animations[animation].spriteSheetStart + nextFrame - 1,
+    animations[animation].spriteSheetStart + nextFrame + alternateOffset - 1,
     animations[animation].spriteSheetStart
   );
 

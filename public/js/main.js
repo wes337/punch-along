@@ -183,10 +183,11 @@ const resetAllParamsToDefault = () => {
 };
 
 const main = () => {
-  createCheckboxesForMoves();
-  addEventListeners();
-  setupCanvas();
-  resetAllParamsToDefault();
+  setupCanvas().then(() => {
+    createCheckboxesForMoves();
+    addEventListeners();
+    resetAllParamsToDefault();
+  });
 };
 
 main();

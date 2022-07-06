@@ -3,10 +3,13 @@ import { CANVAS, DEFAULT_FPS } from "./constants.js";
 
 var canvas;
 var ctx;
-var sprite;
+var spriteSheet;
 var currentAnimation = "idle";
 var fps = DEFAULT_FPS;
 var fpsInterval = Math.round(1000 / fps);
+
+const SPRITE_WIDTH = 120;
+const SPRITE_HEIGHT = 180;
 
 // var timeDebug;
 
@@ -15,58 +18,70 @@ const animations = {
     loop: true,
     frames: 4,
     currentFrame: 0,
+    spriteSheetStart: 16,
   },
   cross: {
     frames: 2,
     currentFrame: 0,
     alternate: true,
+    spriteSheetStart: 12,
   },
   jab: {
     frames: 2,
     currentFrame: 0,
     alternate: true,
+    spriteSheetStart: 20,
   },
   rearHook: {
     frames: 4,
     currentFrame: 0,
+    spriteSheetStart: 34,
   },
   leadHook: {
     frames: 4,
     currentFrame: 0,
+    spriteSheetStart: 24,
   },
   rearUppercut: {
     frames: 4,
     currentFrame: 0,
+    spriteSheetStart: 38,
   },
   leadUppercut: {
     frames: 4,
     currentFrame: 0,
+    spriteSheetStart: 28,
   },
   slip: {
     frames: 1,
     currentFrame: 0,
     alternate: true,
+    spriteSheetStart: 44,
   },
   parry: {
     frames: 2,
     currentFrame: 0,
+    spriteSheetStart: 32,
   },
   roll: {
     frames: 2,
     currentFrame: 0,
+    spriteSheetStart: 42,
   },
   block: {
     frames: 2,
     currentFrame: 0,
     alternate: true,
+    spriteSheetStart: 1,
   },
   bobAndWeave: {
     frames: 8,
     currentFrame: 0,
+    spriteSheetStart: 4,
   },
 };
 
-const getNextSprite = (animation) => {
+const getNextSpriteIndex = (animation) => {
   let nextFrame = animations[animation].currentFrame + 1;
 
   if (nextFrame > animations[animation].frames) {
@@ -94,20 +109,34 @@ const getNextSprite = (animation) => {
         animations[animation].alternate = !animations[animation].alternate;
       }
 
-      return null;
+      return getNextSpriteIndex(currentAnimation);
     }
   }
 
   animations[animation].currentFrame = nextFrame;
+  const nextSpriteIndex = Math.max(
+    animations[animation].spriteSheetStart + nextFrame - 1,
+    animations[animation].spriteSheetStart
+  );
 
-  return `./img/${animation}${
-    animations[animation].alternate ? "2" : ""
-  }-${nextFrame}.png`;
+  return nextSpriteIndex;
+};
+
+const drawSpriteByIndex = (spriteIndex) => {
+  ctx.drawImage(
+    spriteSheet,
+    SPRITE_WIDTH * spriteIndex,
+    0,
+    SPRITE_WIDTH,
+    SPRITE_HEIGHT,
+    0,
+    0,
+    SPRITE_WIDTH,
+    SPRITE_HEIGHT
+  );
 };
 
 const animate = (prevTime = window.performance.now(), time) => {
-  requestAnimationFrame((time) => animate(prevTime, time));
-
   const timeSinceLastLoop = time - prevTime;
 
   const enoughTimeHasPassed = timeSinceLastLoop > fpsInterval;
@@ -116,21 +145,28 @@ const animate = (prevTime = window.performance.now(), time) => {
     prevTime = time - (timeSinceLastLoop % fpsInterval);
 
     ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
-    sprite.src = getNextSprite(currentAnimation) || sprite.src;
-    ctx.drawImage(sprite, 0, 0);
+    const spriteIndex = getNextSpriteIndex(currentAnimation);
+    drawSpriteByIndex(spriteIndex);
   }
+
+  requestAnimationFrame((time) => animate(prevTime, time));
 };
 
 export const setupCanvas = () => {
-  canvas = document.getElementById("canvas");
-  canvas.width = CANVAS.WIDTH;
-  canvas.height = CANVAS.HEIGHT;
+  return new Promise((resolve) => {
+    canvas = document.getElementById("canvas");
+    canvas.width = CANVAS.WIDTH;
+    canvas.height = CANVAS.HEIGHT;
 
-  ctx = canvas.getContext("2d");
-  sprite = new Image();
-  sprite.src = getNextSprite(currentAnimation) || sprite.src;
+    ctx = canvas.getContext("2d");
+    spriteSheet = new Image();
+    spriteSheet.src = "./img/spritesheet.png";
 
-  animate();
+    spriteSheet.onload = () => {
+      animate();
+      resolve();
+    };
+  });
 };
 
 export const getAnimationDuration = (animation) => {
